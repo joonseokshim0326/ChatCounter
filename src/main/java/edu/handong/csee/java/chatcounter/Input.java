@@ -8,28 +8,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Input {
-
+	
 	/**
 	 *  <name, count>
 	 */
 	private static HashMap<String , Integer> parseResultMap;	
-
+	
 	/**
 	 *  <name, <time, wordList>>
 	 */
 	private static HashMap<String , HashMap<String, ArrayList<String>>> chatResultMap;	
-
-
+	
+	
 	/**
 	 * @param inputPath
 	 * @return
 	 */
-
+	
 	public static HashMap<String, Integer> inputFiles(String inputPath) {
 		try {
 			openFolder(inputPath);
 		} catch (Exception e) {
-
+			
 		}
 		return parseResultMap;
 	}
@@ -41,18 +41,18 @@ public class Input {
 		final File folder = new File(inputPath);
 		listFilesForFolder(folder);
 	}
-
+ 
 	/**
 	 * @param folder
 	 */
 	public static void listFilesForFolder(final File folder) {
-		for (final File fileEntry : folder.listFiles()) {
-			if (fileEntry.isDirectory()) {
-				listFilesForFolder(fileEntry);
-			} else {
-				readFile(fileEntry);
-			}
-		}
+	    for (final File fileEntry : folder.listFiles()) {
+	        if (fileEntry.isDirectory()) {
+	            listFilesForFolder(fileEntry);
+	        } else {
+	            readFile(fileEntry);
+	        }
+	    }
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class Input {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-
+			
 		}
 	}
 
@@ -82,7 +82,7 @@ public class Input {
 	 * 
 	 */
 	private static void calcCount() {
-
+		
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class Input {
 			}
 		}
 	}
-
+	
 	/**
 	 * @param dayString
 	 * @param chatMap
@@ -129,19 +129,19 @@ public class Input {
 		dayString = (year + '.' + month + '.' + day);
 		return dayString;
 	}
-
+	
 	/**
 	 * @param lines
 	 * @return 
 	 */
 	private static HashMap<String, String> parseChatLine(String line) {
 		HashMap<String , String> chatMap = new HashMap<>();;
-		String name = "", time = "", word = "";
+		String name = "name", time = "time", word = "word";
 		chatMap.put("name", name);
 		chatMap.put("time", time);
 		chatMap.put("word", word);
 		return chatMap;
-
+		
 	}
-
+	
 }
