@@ -12,12 +12,12 @@ public class Input {
 	/**
 	 *  <name, count>
 	 */
-	private static HashMap<String , Integer> parseResultMap;	
+	private static HashMap<String , Integer> parseResultMap = new HashMap<>();	
 	
 	/**
 	 *  <name, <time, wordList>>
 	 */
-	private static HashMap<String , HashMap<String, ArrayList<String>>> chatResultMap;	
+	private static HashMap<String , HashMap<String, ArrayList<String>>> chatResultMap = new HashMap<>();	
 	
 	
 	/**
@@ -28,6 +28,7 @@ public class Input {
 	public static HashMap<String, Integer> inputFiles(String inputPath) {
 		try {
 			openFolder(inputPath);
+			calcCount();
 		} catch (Exception e) {
 			
 		}
@@ -68,7 +69,6 @@ public class Input {
 				lineList.add(line);
 			}
 			parseLines(lineList);
-			calcCount();
 			bufferedReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -82,7 +82,15 @@ public class Input {
 	 * 
 	 */
 	private static void calcCount() {
-		
+		int chatCount = 0;
+        for( String name : chatResultMap.keySet() ){
+        	chatCount = 0;
+        	for(String timeStamp : chatResultMap.get(name).keySet()) {
+        		chatCount += chatResultMap.get(name).get(timeStamp).size();
+        	}
+        	parseResultMap.put(name, chatCount);
+        }
+        System.out.println(parseResultMap);
 	}
 
 	/**
@@ -110,8 +118,26 @@ public class Input {
 	 * @param chatMap
 	 */
 	private static void updateChatResultMap(String dayString, HashMap<String, String> chatMap) {
-		System.out.println(dayString);
-		System.out.println(chatMap);
+		String name, timeStamp, word;
+ 		HashMap<String, ArrayList<String>> timeStringMap = new HashMap<>();
+ 		ArrayList<String> wordArrayList = new ArrayList<>();
+ 		name = chatMap.get("name");
+ 		timeStamp = dayString + " " + chatMap.get("time");
+ 		word = chatMap.get("word");
+ 		
+		if(!chatResultMap.containsKey(chatMap.get("name"))) {
+			chatResultMap.put(name, timeStringMap);
+		}
+		
+		timeStringMap = chatResultMap.get(name);
+		
+		if(!timeStringMap.containsKey(timeStamp)) {
+			timeStringMap.put(timeStamp, wordArrayList);
+		}
+		wordArrayList = timeStringMap.get(timeStamp);
+		if(!wordArrayList.contains(word)) {
+			wordArrayList.add(word);
+		}
 	}
 
 	/**
@@ -135,8 +161,12 @@ public class Input {
 	 * @return 
 	 */
 	private static HashMap<String, String> parseChatLine(String line) {
-		HashMap<String , String> chatMap = new HashMap<>();;
+ 		HashMap<String , String> chatMap = new HashMap<>();;
 		String name = "name", time = "time", word = "word";
+		name = line.substring(1,line.indexOf(']'));
+		line = line.substring(line.indexOf(']')+1);
+		time = line.substring((line.indexOf('[')+1), line.indexOf(']'));
+		word = line.substring(line.indexOf(']')+2);
 		chatMap.put("name", name);
 		chatMap.put("time", time);
 		chatMap.put("word", word);

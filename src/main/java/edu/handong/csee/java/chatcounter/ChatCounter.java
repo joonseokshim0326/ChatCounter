@@ -12,9 +12,12 @@ public class ChatCounter {
 	public static void main(String[] args) {
 		result = new HashMap<String , Integer>();
 		try {
-			validationCheck(args);
-			result = Input.inputFiles(args[1]);
-			Output.outFile(args[3], result);
+			if(validationCheck(args)) {
+				result = Input.inputFiles(args[1]);
+				Output.outFile(args[3], result);
+			}else {
+				throw new Exception();
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -22,8 +25,9 @@ public class ChatCounter {
 
 	/**
 	 * @param args
+	 * @return 
 	 */
-	private static void validationCheck(String[] args) {
-
+	private static boolean validationCheck(String[] args) {
+		return true;
 	}
 }
