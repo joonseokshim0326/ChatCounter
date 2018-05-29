@@ -16,9 +16,10 @@ public class ChatCounter {
 				result = Input.inputFiles(args[1]);
 				Output.outFile(args[3], result);
 			}else {
-				throw new Exception();
+				throw new ArgsErrorException("Args are error");
 			}
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			System.out.println(e);
 		}
 	}
@@ -28,6 +29,12 @@ public class ChatCounter {
 	 * @return 
 	 */
 	private static boolean validationCheck(String[] args) {
+		if(args == null) {
+			return false;
+		}
+		if(args.length != 4) {
+			return false;
+		}
 		return true;
 	}
 }

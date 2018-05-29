@@ -1,10 +1,16 @@
 package edu.handong.csee.java.chatcounter;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Output {
 
@@ -13,26 +19,45 @@ public class Output {
 	 * @throws IOException 
 	 */
 	public static void outFile(String resultFileName, HashMap<String, Integer> resultMap) throws IOException {
+		List<Entry<String, Integer>> sortedEntries = null;
 		String filePath, fileName = null;
 		filePath = resultFileName.substring(0,resultFileName.lastIndexOf("\\"));
 		fileName = resultFileName.substring(resultFileName.lastIndexOf("\\")+1);
-		makeResultFile(filePath, fileName, resultMap);
+		sortedEntries = sortMap(resultMap);
+		makeResultFile(filePath, fileName, sortedEntries);
 	}
 
 	/**
+	 * @param map
+	 * @return
+	 */
+	static <K, V extends Comparable<? super V>> List<Entry<String, Integer>> sortMap(Map<String, Integer> map) {
+ 	    List<Entry<String, Integer>> sortedEntries = new ArrayList<Entry<String, Integer>>(map.entrySet());
+
+	    Collections.sort(sortedEntries, new Comparator<Entry<String, Integer>>() {
+	        @Override
+	        public int compare(Entry<String, Integer> e1, Entry<String, Integer> e2) {
+	            return e2.getValue().compareTo(e1.getValue());
+	        }
+	    });
+
+	    return sortedEntries;
+	}
+	
+	/**
 	 * @param resultFileName
-	 * @param resultMap
+	 * @param sortedEntries
 	 * @throws IOException 
 	 */
-	private static void makeResultFile(String resultFilePath, String resultFileName, HashMap<String, Integer> resultMap) throws IOException {
-		FileWriter writer = new FileWriter(resultFilePath + "/" + resultFileName, true);
-		BufferedWriter bw = new BufferedWriter(writer);
+	private static void makeResultFile(String resultFilePath, String resultFileName, List<Entry<String, Integer>> sortedEntries) throws IOException {
+		BufferedWriter bw = new BufferedWriter
+			    (new OutputStreamWriter(new FileOutputStream(resultFilePath + "/" + resultFileName), "UTF-8"));
 		bw.write("kakao_id,count");
 		bw.newLine();
-		for(String name : resultMap.keySet()) {
-			bw.write(name + "," +resultMap.get(name));
+		for(Entry<String, Integer> entry : sortedEntries){
+	    	bw.write(entry.getKey() + "," +entry.getValue());
 			bw.newLine();
-    	}
+	    }
 		bw.flush();
 		bw.close();
 	}

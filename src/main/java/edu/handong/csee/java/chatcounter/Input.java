@@ -2,8 +2,9 @@ package edu.handong.csee.java.chatcounter;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -63,8 +64,10 @@ public class Input {
 		try {
 			String line = "";
 			ArrayList<String> lineList = new ArrayList<String>();
-			FileReader fileReader = new FileReader(fileEntry);
+			InputStreamReader fileReader = new InputStreamReader(new FileInputStream(fileEntry), "UTF-8");
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
+			
+			
 			while((line = bufferedReader.readLine()) != null) {
 				lineList.add(line);
 			}
@@ -145,15 +148,17 @@ public class Input {
 	 * @return 
 	 */
 	private static String parseDayLine(String line) {
-		String dayString = "";
+		line = line.replaceAll("\\s+", "");
+		line = line.replaceAll("-", "");
+		/*String dayString = "";
 		String[] array;
 		String year, month, day;
 		array = line.split(" ");
 		year = array[1].replaceAll("[^0-9]", "");
 		month = array[2].replaceAll("[^0-9]", "");
 		day = array[3].replaceAll("[^0-9]", "");
-		dayString = (year + '.' + month + '.' + day);
-		return dayString;
+		dayString = (year + '.' + month + '.' + day);*/
+		return line;
 	}
 	
 	/**
