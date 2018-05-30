@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * This class counts the number of chats in a message file to make it a csv file.
- * @author joonseokshim0326
+ * @author jssjp
  * 2018. 5. 29.
  */
 public class ChatCounter {
