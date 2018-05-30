@@ -1,12 +1,16 @@
 package edu.handong.csee.java.chatcounter;
 
 import java.util.HashMap;
-
+/**
+ * class ChatCounter
+ * @author jssjp
+ */
 public class ChatCounter {
 
 	private static HashMap<String , Integer> result;
 
 	/**
+	 * main method
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -25,6 +29,7 @@ public class ChatCounter {
 	}
 
 	/**
+	 * Checking validation method
 	 * @param args
 	 * @return 
 	 */
