@@ -11,18 +11,19 @@ import java.util.HashMap;
 public class Input {
 	
 	/**
-	 *  <name, count>
+	 * key is Person name, value is Number of times said
 	 */
 	private static HashMap<String , Integer> parseResultMap = new HashMap<>();	
 	
 	/**
-	 *  <name, <time, wordList>>
+	 *  <key is Person name, <key is The time of the chat, value is Conversation contents>>
 	 */
 	private static HashMap<String , HashMap<String, ArrayList<String>>> chatResultMap = new HashMap<>();	
 	
 	
-	/**
-	 * @param inputPath
+	/** 
+	 * Reads the file in its path and analyzes the number of conversations.
+	 * @param inputPath The folder where the conversation file is located.
 	 * @return
 	 */
 	
@@ -37,6 +38,7 @@ public class Input {
 	}
 
 	/**
+	 * Read a path
 	 * @param inputPath
 	 */
 	private static void openFolder(String inputPath) {
@@ -45,6 +47,7 @@ public class Input {
 	}
  
 	/**
+	 * If there is a folder, it recurs and reads it if it is a file.
 	 * @param folder
 	 */
 	public static void listFilesForFolder(final File folder) {
@@ -58,6 +61,7 @@ public class Input {
 	}
 
 	/**
+	 * Read the file one line at a time and send it to the parser.
 	 * @param fileEntry
 	 */
 	private static void readFile(File fileEntry){
@@ -79,10 +83,9 @@ public class Input {
 			
 		}
 	}
-
-
+	
 	/**
-	 * 
+	 * Create a map with the number of conversations.
 	 */
 	private static void calcCount() {
 		int chatCount = 0;
@@ -97,6 +100,7 @@ public class Input {
 	}
 
 	/**
+	 * Read one line to separate the conversation or date and send it to the analyzer.
 	 * @param lines
 	 */
 	private static void parseLines(ArrayList<String> lines) {
@@ -117,6 +121,7 @@ public class Input {
 	}
 	
 	/**
+	 * Find the name value and put the time and content.
 	 * @param dayString
 	 * @param chatMap
 	 */
@@ -144,7 +149,8 @@ public class Input {
 	}
 
 	/**
-	 * @param lines
+	 * Only time values are extracted from line.
+	 * @param line One line read from the file.
 	 * @return 
 	 */
 	private static String parseDayLine(String line) {
@@ -162,7 +168,8 @@ public class Input {
 	}
 	
 	/**
-	 * @param lines
+	 * Extracts the name and time conversation from the line.
+	 * @param line One line read from the file.
 	 * @return 
 	 */
 	private static HashMap<String, String> parseChatLine(String line) {

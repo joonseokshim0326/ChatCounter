@@ -2,12 +2,21 @@ package edu.handong.csee.java.chatcounter;
 
 import java.util.HashMap;
 
+/**
+ * This class counts the number of chats in a message file to make it a csv file.
+ * @author joonseokshim0326
+ * 2018. 5. 29.
+ */
 public class ChatCounter {
 
+	/**
+	 * key is Person name, value is Number of times said
+	 */
 	private static HashMap<String , Integer> result;
 
 	/**
-	 * @param args
+	 * @param args -i The folder adress where the chat file is located. -o The path to the csv file.
+	 * @author joonseokshim0326
 	 */
 	public static void main(String[] args) {
 		result = new HashMap<String , Integer>();
@@ -25,6 +34,7 @@ public class ChatCounter {
 	}
 
 	/**
+	 * Check that CLI parameters are correct.
 	 * @param args
 	 * @return 
 	 */

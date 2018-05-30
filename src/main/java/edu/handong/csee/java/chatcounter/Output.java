@@ -15,8 +15,10 @@ import java.util.Map.Entry;
 public class Output {
 
 	/**
-	 * @param result
-	 * @throws IOException 
+	 * Create a csv file with the contents of map.
+	 * @param resultFileName
+	 * @param resultMap
+	 * @throws IOException
 	 */
 	public static void outFile(String resultFileName, HashMap<String, Integer> resultMap) throws IOException {
 		List<Entry<String, Integer>> sortedEntries = null;
@@ -28,6 +30,7 @@ public class Output {
 	}
 
 	/**
+	 * Create an entry by sorting the values in map in descending order.
 	 * @param map
 	 * @return
 	 */
@@ -45,9 +48,11 @@ public class Output {
 	}
 	
 	/**
+	 * Create a csv file with the contents of the entry.
+	 * @param resultFilePath
 	 * @param resultFileName
 	 * @param sortedEntries
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private static void makeResultFile(String resultFilePath, String resultFileName, List<Entry<String, Integer>> sortedEntries) throws IOException {
 		BufferedWriter bw = new BufferedWriter
