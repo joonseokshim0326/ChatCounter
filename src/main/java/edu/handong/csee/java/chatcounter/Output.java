@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * This class for output of program
+ * @author jssjp
+ */
 public class Output {
 
 	/**
