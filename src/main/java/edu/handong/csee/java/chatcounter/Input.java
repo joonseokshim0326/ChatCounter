@@ -8,6 +8,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * This class for input of program
+ * @author jssjp
+ */
 public class Input {
 	
 	/**
