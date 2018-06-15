@@ -1,5 +1,6 @@
 package edu.handong.csee.java.chatcounter;
 
+
 import java.util.HashMap;
 
 /**
@@ -15,15 +16,15 @@ public class ChatCounter {
 	private static HashMap<String , Integer> result;
 
 	/**
-	 * @param args -i The folder adress where the chat file is located. -o The path to the csv file.
+	 * @param args -c number of threads -i The folder adress where the chat file is located. -o The path to the csv file.
 	 * @author joonseokshim0326
 	 */
 	public static void main(String[] args) {
 		result = new HashMap<String , Integer>();
 		try {
 			if(validationCheck(args)) {
-				result = Input.inputFiles(args[1]);
-				Output.outFile(args[3], result);
+				result = Input.inputFiles(args[1], args[3]);
+				Output.outFile(args[5], result);
 			}else {
 				throw new ArgsErrorException("Args are error");
 			}
@@ -37,13 +38,14 @@ public class ChatCounter {
 	 * Check that CLI parameters are correct.
 	 * @param args
 	 * @return 
+	 * @throws ArgsErrorException 
 	 */
-	private static boolean validationCheck(String[] args) {
+	private static boolean validationCheck(String[] args) throws ArgsErrorException {
 		if(args == null) {
-			return false;
+			throw new ArgsErrorException("Args are error (Args are null.)");
 		}
-		if(args.length != 4) {
-			return false;
+		if(args.length != 6) {
+			throw new ArgsErrorException("Args are error (The number of args is not correct. 'ex) -c number of threads -i path -o file path')");
 		}
 		return true;
 	}
