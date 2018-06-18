@@ -26,7 +26,7 @@ public class ChatCounter {
 				result = Input.inputFiles(args[1], args[3]);
 				Output.outFile(args[5], result);
 			}else {
-				throw new ArgsErrorException("Args are error");
+				throw new ArgsErrorException("Args are error.");
 			}
 		} 
 		catch (Exception e) {
@@ -42,10 +42,10 @@ public class ChatCounter {
 	 */
 	private static boolean validationCheck(String[] args) throws ArgsErrorException {
 		if(args == null) {
-			throw new ArgsErrorException("Args are error (Args are null.)");
+			throw new ArgsErrorException("Args are error. (Args are null.)");
 		}
 		if(args.length != 6) {
-			throw new ArgsErrorException("Args are error (The number of args is not correct. 'ex) -c number of threads -i path -o file path')");
+			throw new ArgsErrorException("Args are error. (The number of args is not correct. 'ex) -c number of threads -i path -o file path')");
 		}
 		return true;
 	}
